@@ -1,7 +1,18 @@
-import contextlib
+import os, contextlib
 
 with contextlib.redirect_stdout(None):
     import pygame
+
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller"""
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 import sys, pywinstyles, random
 from colors import *
@@ -169,7 +180,8 @@ def game():
 
     # -- Parse Arguments -- #
     if len(sys.argv) == 2:
-        moves = get_moves_from_file(sys.argv[1])
+        file_to_open = os.path.abspath(sys.argv[1])
+        moves = get_moves_from_file(file_to_open)
         solve = [inverse_map[move] for move in reversed(moves)]
 
     if not moves and len(sys.argv) == 2:
@@ -194,8 +206,7 @@ def game():
     pygame.display.set_caption("Rubik's Cube")
     pywinstyles.change_header_color(None, BLACK[1].lower())
 
-    icon = pygame.image.load("assets/RubiksCubeLogo.png")
-
+    icon = pygame.image.load(resource_path("assets/RubiksCubeLogo.png"))
     pygame.display.set_icon(icon)
 
     FPS = 60
