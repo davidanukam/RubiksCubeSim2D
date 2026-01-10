@@ -57,7 +57,7 @@ python main.py scramble_example.txt
 
 ```
 
-> **Note:** The file parser expects standard Rubik's notation (e.g., U, R', F2, etc.) -> See scramble_example.txt
+> **Note:** The file parser expects standard Rubik's notation (e.g., U, R', F2, etc.) -> See [scramble_example.txt](https://github.com/davidanukam/RubiksCubeSim2D/blob/main/scramble_example.txt)
 
 ---
 
