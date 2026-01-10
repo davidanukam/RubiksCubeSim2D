@@ -18,7 +18,7 @@ Scramble a cube, (either randomly or via a file input) and visualize the solving
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/RubiksCubeSim2D.git
+git clone https://github.com/davidanukam/RubiksCubeSim2D.git
 cd RubiksCubeSim2D
 
 ```
