@@ -93,4 +93,4 @@ python game.py scramble_example.txt
 
 ## 📝 License
 
-This project is open-source and available under the [MIT License](https://www.google.com/search?q=LICENSE).
+This project is open-source and available under the [MIT License](https://github.com/davidanukam/RubiksCubeSim2D/blob/main/LICENSE).
