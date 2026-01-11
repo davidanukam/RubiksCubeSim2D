@@ -1,4 +1,4 @@
-# PyGame Rubik's Cube Simulator
+# Rubik's Cube Simulator
 
 A 2D Rubik's Cube simulation built with **Python** and **PyGame**.
 
