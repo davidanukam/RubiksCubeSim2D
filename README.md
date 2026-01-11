@@ -56,7 +56,7 @@ The finished file will be located in the `/dist` folder.
 
 ### 1. Running the Script
 
-By default, the game performs 100 random moves or accepts a file argument:
+By default, the game performs 100 random moves **or accepts a file argument**:
 
 (See [scramble_example.txt](https://github.com/davidanukam/RubiksCubeSim2D/blob/main/scramble_example.txt))
 
@@ -64,6 +64,7 @@ By default, the game performs 100 random moves or accepts a file argument:
 python game.py scramble_example.txt
 
 ```
+> [Rubik's Cube - Move Notation](https://jperm.net/3x3/moves)
 
 ### 2. Running the Executable
 
