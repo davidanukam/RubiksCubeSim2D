@@ -1,4 +1,4 @@
-from movement import *
+from utils.movement import *
 
 move_map = {
     "U": up,

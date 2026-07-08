@@ -1,5 +1,5 @@
 import pygame as pg
-from colors import *
+from utils.colors import *
 
 text = pg.font.Font(None, 40)
 
