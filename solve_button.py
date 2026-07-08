@@ -1,7 +1,7 @@
-import pygame
+import pygame as pg
 from colors import *
 
-text = pygame.font.Font(None, 40)
+text = pg.font.Font(None, 40)
 
 
 class SolveButton:
@@ -14,15 +14,15 @@ class SolveButton:
         self.min_w = self.w
         self.max_w = self.w + 10
         self.color = RED[0]
-        self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
+        self.rect = pg.Rect(self.x, self.y, self.w, self.h)
         self.state = "Solve"
         self.hovering = False
         self.canClick = True
 
     def draw(self, surface):
-        pygame.draw.rect(surface, self.color, self.rect)
+        pg.draw.rect(surface, self.color, self.rect)
 
-        pygame.draw.rect(surface, "white", self.rect, width=2)
+        pg.draw.rect(surface, "white", self.rect, width=2)
 
         num_surface = text.render(f"{self.state}", True, "white")
         num_rect = num_surface.get_rect()
@@ -31,7 +31,7 @@ class SolveButton:
         surface.blit(num_surface, num_rect)
 
     def on_hover(self):
-        mouse = pygame.mouse.get_pos()
+        mouse = pg.mouse.get_pos()
         if (
             (mouse[0] > self.x and mouse[0] < self.x + self.w)
             and (mouse[1] > self.y and mouse[1] < self.y + self.h)
@@ -42,7 +42,7 @@ class SolveButton:
                 self.h = self.w / (16 / 9)
                 self.x -= self.scale / 2
                 self.y -= self.scale / 2
-                self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
+                self.rect = pg.Rect(self.x, self.y, self.w, self.h)
                 self.hovering = True
             if self.state == "Solve":
                 self.color = DARK_RED[0]
@@ -54,14 +54,14 @@ class SolveButton:
                 self.h = self.w / (16 / 9)
                 self.x += self.scale / 2
                 self.y += self.scale / 2
-                self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
+                self.rect = pg.Rect(self.x, self.y, self.w, self.h)
             if self.state == "Solve":
                 self.color = RED[0]
             elif self.state == "Solving":
                 self.color = ORANGE[0]
 
     def on_click(self):
-        mouse = pygame.mouse.get_pressed()
+        mouse = pg.mouse.get_pressed()
         if mouse[0]:
             if self.hovering and self.state == "Solve":
                 if self.canClick:
@@ -73,7 +73,7 @@ class SolveButton:
                     self.x += self.scale
                     self.y += self.scale
                     self.color = DARKER_RED[0]
-                    self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
+                    self.rect = pg.Rect(self.x, self.y, self.w, self.h)
 
                     return True
         else:

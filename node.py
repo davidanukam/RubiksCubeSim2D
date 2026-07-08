@@ -1,8 +1,8 @@
-import pygame
+import pygame as pg
 
-pygame.font.init()
+pg.font.init()
 
-num = pygame.font.Font(None, 20)
+num = pg.font.Font(None, 20)
 
 
 class Node:
@@ -12,14 +12,14 @@ class Node:
         self.w = w
         self.h = h
         self.color = color
-        self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
+        self.rect = pg.Rect(self.x, self.y, self.w, self.h)
         self.number = number
 
     def draw(self, surface):
-        pygame.draw.rect(surface, self.color, self.rect)
+        pg.draw.rect(surface, self.color, self.rect)
 
         if self.color != (0, 0, 0):
-            pygame.draw.rect(surface, "white", self.rect, width=2)
+            pg.draw.rect(surface, "white", self.rect, width=2)
 
             num_surface = num.render(f"{self.number}", True, "white")
             num_rect = num_surface.get_rect()
@@ -29,4 +29,4 @@ class Node:
             # surface.blit(num_surface, num_rect)
 
         # ENABLE to see cube grid
-        # pygame.draw.rect(surface, "white", self.rect, width=2)
+        pg.draw.rect(surface, "white", self.rect, width=2)

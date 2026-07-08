@@ -1,4 +1,4 @@
-from game import game
+from sim import Sim
 
 if __name__ == "__main__":
-    game()
+    Sim()
