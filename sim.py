@@ -257,7 +257,7 @@ def Sim():
     moves: list[Callable[..., Any]] = []
     # solve = []
 
-    """ # LEGACY CODE SOLVER (INVERSE MAPPING)
+    """ # LEGACY CUBE SOLVER (INVERSE MAPPING)
     # -- Parse Arguments -- #
     if len(sys.argv) == 2:
         file_to_open = os.path.abspath(sys.argv[1])
