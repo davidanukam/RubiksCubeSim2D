@@ -29,4 +29,4 @@ class Node:
             # surface.blit(num_surface, num_rect)
 
         # ENABLE to see cube grid
-        pg.draw.rect(surface, "white", self.rect, width=2)
+        # pg.draw.rect(surface, "white", self.rect, width=2)

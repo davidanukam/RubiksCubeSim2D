@@ -287,16 +287,15 @@ class Simulation:
 
         self.create_objects()
 
-    # NOTE: Testing 3D rendering below #
-
     def create_objects(self):
-        self.camera = Camera(self, [0.5, 1, -4])
-        self.projection = Projection(self)
-        self.object = Object3D(self)
-        self.object.translate([0.2, 0.4, 0.2])
-        self.object.rotate_y(math.pi / 6)
+        # NOTE: For 3D Rendering
+        # self.camera = Camera(self, [0.5, 1, -4])
+        # self.projection = Projection(self)
+        # self.object = Object3D(self)
+        # self.object.translate([0.2, 0.4, 0.2])
+        # self.object.rotate_y(math.pi / 6)
 
-        # self.moves = [random.choice(self.possible_moves) for _ in range(100)]
+        self.moves = [random.choice(self.possible_moves) for _ in range(100)]
 
     def create_nodes(self):
         for i in range(len(cube_grid)):
@@ -325,11 +324,11 @@ class Simulation:
     def draw(self):
         self.screen.fill(BLACK[0])
 
-        # for row in self.nodes:
-        #     for node in row:
-        #         node.draw(self.screen)
+        for row in self.nodes:
+            for node in row:
+                node.draw(self.screen)
 
-        self.object.draw()
+        # self.object.draw() # NOTE: For 3D Rendering
 
         pg.display.flip()
 
@@ -339,20 +338,22 @@ class Simulation:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     self.running = False
-                # if event.type == pg.KEYDOWN:
-                #     is_alt = bool(event.mod & pg.KMOD_ALT)
-                #     is_shift = bool(event.mod & pg.KMOD_SHIFT)
-                #     is_ctrl = bool(event.mod & pg.KMOD_CTRL)
+                if event.type == pg.KEYDOWN:
+                    is_alt = bool(event.mod & pg.KMOD_ALT)
+                    is_shift = bool(event.mod & pg.KMOD_SHIFT)
+                    is_ctrl = bool(event.mod & pg.KMOD_CTRL)
 
-                #     mod_combo = (is_alt, is_shift, is_ctrl)
+                    mod_combo = (is_alt, is_shift, is_ctrl)
 
-                #     current_key_map = self.MOVE_MAPPING.get(mod_combo, {})
+                    current_key_map = self.MOVE_MAPPING.get(mod_combo, {})
 
-                #     if event.key in current_key_map:
-                #         self.moves.append(current_key_map[event.key])
+                    if event.key in current_key_map:
+                        self.moves.append(current_key_map[event.key])
 
-            # self.update()
-            self.camera.control()
+            self.update()
+
+            # self.camera.control() #NOTE: FOR 3D Rendering
+
             self.draw()
 
             # -- Solve Button -- #
