@@ -24,6 +24,8 @@ from solve_button import SolveButton
 from utils.cube_data import cube_grid
 from utils.file_parser import get_moves_from_file
 from object_3d import *
+from camera import *
+from projection import *
 
 
 class Simulation:
@@ -39,8 +41,8 @@ class Simulation:
 
         keyboard.block_key("windows")
 
-        self.WIDTH, self.HEIGHT = 1280, 720
-        self.CENTER_X, self.CENTER_Y = self.WIDTH // 2, self.HEIGHT // 2
+        self.RES = self.WIDTH, self.HEIGHT = 1280, 720
+        self.H_WIDTH, self.H_HEIGHT = self.WIDTH // 2, self.HEIGHT // 2
 
         self.screen = pg.display.set_mode((self.WIDTH, self.HEIGHT))
         pg.display.set_caption("Rubik's Cube Simulation")
@@ -283,12 +285,18 @@ class Simulation:
             solve = [inverse_map[move] for move in reversed(moves)]
         """
 
-        # NOTE: Testing 3D rendering below #
+        self.create_objects()
 
-        def create_objects():
-            object = Object3D(self)
+    # NOTE: Testing 3D rendering below #
 
-        self.moves = [random.choice(self.possible_moves) for _ in range(100)]
+    def create_objects(self):
+        self.camera = Camera(self, [0.5, 1, -4])
+        self.projection = Projection(self)
+        self.object = Object3D(self)
+        self.object.translate([0.2, 0.4, 0.2])
+        self.object.rotate_y(math.pi / 6)
+
+        # self.moves = [random.choice(self.possible_moves) for _ in range(100)]
 
     def create_nodes(self):
         for i in range(len(cube_grid)):
@@ -317,9 +325,11 @@ class Simulation:
     def draw(self):
         self.screen.fill(BLACK[0])
 
-        for row in self.nodes:
-            for node in row:
-                node.draw(self.screen)
+        # for row in self.nodes:
+        #     for node in row:
+        #         node.draw(self.screen)
+
+        self.object.draw()
 
         pg.display.flip()
 
@@ -329,20 +339,20 @@ class Simulation:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     self.running = False
-                if event.type == pg.KEYDOWN:
-                    is_alt = bool(event.mod & pg.KMOD_ALT)
-                    is_shift = bool(event.mod & pg.KMOD_SHIFT)
-                    is_ctrl = bool(event.mod & pg.KMOD_CTRL)
+                # if event.type == pg.KEYDOWN:
+                #     is_alt = bool(event.mod & pg.KMOD_ALT)
+                #     is_shift = bool(event.mod & pg.KMOD_SHIFT)
+                #     is_ctrl = bool(event.mod & pg.KMOD_CTRL)
 
-                    mod_combo = (is_alt, is_shift, is_ctrl)
+                #     mod_combo = (is_alt, is_shift, is_ctrl)
 
-                    current_key_map = self.MOVE_MAPPING.get(mod_combo, {})
+                #     current_key_map = self.MOVE_MAPPING.get(mod_combo, {})
 
-                    if event.key in current_key_map:
-                        self.moves.append(current_key_map[event.key])
+                #     if event.key in current_key_map:
+                #         self.moves.append(current_key_map[event.key])
 
-            self.update()
-
+            # self.update()
+            self.camera.control()
             self.draw()
 
             # -- Solve Button -- #
